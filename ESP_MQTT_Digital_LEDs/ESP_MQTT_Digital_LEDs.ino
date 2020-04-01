@@ -31,25 +31,25 @@
 
 
 /************ WIFI and MQTT Information (CHANGE THESE FOR YOUR SETUP) ******************/
-const char* ssid = "YourSSID"; //type your WIFI information inside the quotes
-const char* password = "YourWIFIpassword";
-const char* mqtt_server = "your.MQTT.server.ip";
-const char* mqtt_username = "yourMQTTusername";
-const char* mqtt_password = "yourMQTTpassword";
+const char* ssid = ""; //type your WIFI information inside the quotes
+const char* password = "";
+const char* mqtt_server = "";
+const char* mqtt_username = "";
+const char* mqtt_password = "";
 const int mqtt_port = 1883;
 
 
 
 /**************************** FOR OTA **************************************************/
-#define SENSORNAME "porch" //change this to whatever you want to call your device
-#define OTApassword "yourOTApassword" //the password you will need to enter to upload remotely via the ArduinoIDE
+#define SENSORNAME "" //change this to whatever you want to call your device
+#define OTApassword "" //the password you will need to enter to upload remotely via the ArduinoIDE
 int OTAport = 8266;
 
 
 
 /************* MQTT TOPICS (change these topics as you wish)  **************************/
-const char* light_state_topic = "bruh/porch";
-const char* light_set_topic = "bruh/porch/set";
+const char* light_state_topic = "";
+const char* light_set_topic = "";
 
 const char* on_cmd = "ON";
 const char* off_cmd = "OFF";
@@ -66,11 +66,17 @@ const int BUFFER_SIZE = JSON_OBJECT_SIZE(10);
 
 
 /*********************************** FastLED Defintions ********************************/
-#define NUM_LEDS    186
-#define DATA_PIN    5
+#define NUM_LEDS    50
+#define DATA_PIN_1      13
+#define DATA_PIN_2      12
+#define DATA_PIN_3      14
+#define DATA_PIN_4      5
+#define DATA_PIN_5      4
 //#define CLOCK_PIN 5
 #define CHIPSET     WS2811
+//#define COLOR_ORDER BRG
 #define COLOR_ORDER BRG
+#define MILLION 1000000
 
 byte realRed = 0;
 byte realGreen = 0;
@@ -79,7 +85,7 @@ byte realBlue = 0;
 byte red = 255;
 byte green = 255;
 byte blue = 255;
-byte brightness = 255;
+byte brightness = 150;
 
 
 
@@ -179,7 +185,11 @@ struct CRGB leds[NUM_LEDS];
 /********************************** START SETUP*****************************************/
 void setup() {
   Serial.begin(115200);
-  FastLED.addLeds<CHIPSET, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.addLeds<CHIPSET, DATA_PIN_1, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.addLeds<CHIPSET, DATA_PIN_2, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.addLeds<CHIPSET, DATA_PIN_3, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.addLeds<CHIPSET, DATA_PIN_4, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.addLeds<CHIPSET, DATA_PIN_5, COLOR_ORDER>(leds, NUM_LEDS);
 
   setupStripedPalette( CRGB::Red, CRGB::Red, CRGB::White, CRGB::White); //for CANDY CANE
   gPal = HeatColors_p; //for FIRE

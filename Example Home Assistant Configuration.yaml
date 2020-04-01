@@ -6,35 +6,35 @@ mqtt:
   password: YOURPASSWORD
 
 light:
-  - platform: mqtt_json
-    name: "Porch Strip"
-    state_topic: "bruh/porch"
-    command_topic: "bruh/porch/set"
-    effect: true
-    effect_list:
-      - bpm
-      - candy cane  
-      - confetti  
-      - cyclon rainbow  
-      - dots  
-      - fire  
-      - glitter  
-      - juggle  
-      - lightning
-      - noise  
-      - police all  
-      - police one  
-      - rainbow  
-      - rainbow with glitter  
-      - ripple  
-      - sinelon  
-      - solid  
-      - twinkle  
-    brightness: true
-    flash: true
-    rgb: true
-    optimistic: false
-    qos: 0
+- platform: mqtt
+  name: "Logo"
+  schema: json
+  state_topic: "led/logo"
+  command_topic: "led/logo/set"
+  effect: true
+  effect_list:
+    - bpm
+    - candy cane  
+    - confetti  
+    - cyclon rainbow  
+    - dots  
+    - fire  
+    - glitter  
+    - juggle  
+    - lightning
+    - noise  
+    - police all  
+    - police one  
+    - rainbow  
+    - rainbow with glitter  
+    - ripple  
+    - sinelon  
+    - solid  
+    - twinkle  
+  brightness_scale: 150
+  rgb: true
+  optimistic: false
+  qos: 0
 
 input_slider:
   porch_animation_speed:
